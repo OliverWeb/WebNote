@@ -1,0 +1,241 @@
+1.移动端的适配，cssHack
+	Firefox:-moz-
+	Chrome Safari:-webkit-
+	Opera:-o-
+	IE：-ms-
+	①css类内部hack,给样式正价前后缀。 + ： IE6，IE7
+																- ： IE6
+                      	        同时出现的话
+                      	         + ：IE7
+                      	          - ：IE6
+	②选择器：                *前缀：IE6识别
+                      	   div{ .... }
+                      	   *div{ ... }
+                      	   *+前缀：IE7
+                      	   *+div{}
+	③条件注释
+													<!--[if 条件 IE 版本]>
+                          	      内容1
+                          	      内容2
+                          	   <![endif]-->
+                          	   条件：
+                          	     1、gt
+                          	        指定版本 以上的版本有效
+                          		      gt IE 6
+                          	     2、gte
+                          		      大于等于指定版本 以上的版本
+                          	     3、lt
+                          	        小于 指定版本的 浏览器
+                          	     4、lte
+                          	        小于等于 指定版本的浏览器
+                          	     5、!
+                          	        非IE浏览器时
+					
+	（线性渐变的）
+	(zoom等于1，清楚浮动)
+		 * 浏览器不支持属性的话，前缀加在属性前。
+  	 * 浏览器支持属性但不支持值的话，前缀加在值前。
+2.css中的溢出：
+		条件：在parent的没有border的情况下，并且此时给第一个firstElementChild设置了上外边距，这是就会产生外边距的溢出。
+		解决方案:1.给父元素增加border。
+						2.为父元素设置padding，进而取消firstElementChild的margin。
+						3.父元素增加一个空的table;
+						elem:before{
+							content:'';
+							display:block;
+						}
+		
+3.定位：
+		1.普通流的定位：
+				块级元素可以通过margin进行定位。
+				行内通过margin改变横向的位置。
+				text-indent首行缩进;
+		2.浮动定位
+			2.1 脱离文档流，不占据页面的空间。
+			2.2 会停靠在parent的左边或右边，或其他已经浮动元素的边缘上。
+					（解决了块级元素不能再一行内的显示的问题）
+			2.3 如果父元素的width无法容纳all的浮动元素，那么将造成最后一个换行。
+					任何元素一旦浮动，都将变成block元素。
+					如果该元素没有进行尺寸限制的话，float后width将变成自适应。
+					文字，行内，行内块，采用环绕的方式。
+		3.浮动元素会造成父元素的高度为0；
+			solution:overflow.
+			elem：after{
+				content:'';
+				display:block;
+				clear:both;
+			}
+		4.相对定位
+			相对元素原来的位置进行偏移，
+		5.绝对定位
+				脱离文档流，不占据页面的空间，
+				现对于离他最近已定位的祖先元素进行定位（relative,absolute,fixed）;
+				元素将变成块级元素，margin可以用，但是margin-auto失效。
+		6.z-index：父子关系没有办法使用，只能是siblings;
+		7.固定定位脱离文档流，fixed;
+4.边框阴影：
+		box-shadow:h-shadow  v-shadow  blur   spread color inset
+					水平偏移 垂直偏移 （模糊距离）（阴影的尺寸） 颜色 外阴影该问内阴影
+5.文字阴影：
+		text-shadow:h-shadow v-shadow blur color;
+	
+6颜色的渐变：background-images:linear-gradient(angle,color-point1,color-point2,.....);
+	background-image:linear-gradient(0deg,red 0%,green 10%,blue 50%);
+7.伪类元素：用于匹配元素不同状态时的样式。
+	伪元素：匹配元素的内容。
+8.margin取值auto：
+		1.只对左右外边距有效，上下外边距无效。
+		2.用于控制块级元素水平居中。（该元素必须有宽度否者无效）。
+		3.两个垂直外边距合并时，他们将形成一个外边距，以较大的为主。
+9.背景图的固定：background-attachment:srcoll&fixed.
+10.css Sprites以及PS传统切图和精准切图的。切片或裁剪或脚本进行智能切片。
+11.text-align:控制文本的水平对齐方式。
+		vertical-align:垂直居中 middle,行内块允许使用，img,左右两端的文本。baseline,图片基线的对齐方式。
+		
+		line-height:文本垂直居中
+		font:12px/24px;
+
+
+CSS高级
+		1.复杂选择器
+			1.1 兄弟选择器
+			1.2 属性选择器
+			1.3 伪类  （匹配元素状态）
+			1.4 伪元素（匹配元素内容）
+		2.内容生成
+			2.1 内容生成----content,:before,:after
+			2.2 计时器  counter-reset --counter-increment属性；利用:before 调用定时器
+			2.3 转换：2D转换和3D转换
+							transform:transform-function
+							transform-origin:转换原点
+							transform:translate()
+							transform:scale();
+							transform:rotate();
+							transform:skew();
+									
+			2.4 过度:transition-property
+							transition-duration
+							transition-timing-function
+							transition-delay:
+			2.5 动画
+							声明动画：@keyframes name{}
+							animation-name
+							animation-duration
+							animation-timing-function
+							animation-delay
+							animation-iteration-count
+							animation-direction
+							animation-fill-mode:
+							animation-play-state:
+			定时器：
+							setInterval(function(){},时间间隔)
+								clearInterval(t)
+							让程序按照指定的时间间隔反复自动执行任务；
+								停止定时器：1.手动停止定时器
+													2.判断临界值
+							setTimeout(task,等待时间)
+								clearTimeout(timer);
+								timer=null
+							先等一段时间在执行一次任务；执行后制动停止；
+							
+		HTML5：
+		1.input新增的type:email,ulr,tel,date(F),color(F,C),search,number,range
+						新属性：placeholder 占位符，autofocus 自动获取焦点，autocomplete是否记录上次提交的内容，
+									与表单验证的属性
+									required   必填属性，不然用户无法提交
+									minlength  字符个数的限制
+									maxlength
+									max,min    用于meter,progress使用最大和最小值
+									step       步长
+									
+						新元素：datalist数据列表，主要是为input提供输入列表。
+										progress进度提示，不提交，不能操作
+										meter刻度尺
+										output:用于计算；
+										都还存在兼容性
+			修改表单验证的属性：
+				H5为所有表单输入域提供了一个validity对象属性：
+				valid 输入有效
+				badeInput:无效输入
+				customError:false是否存在自定义错误；
+				rangOverflow
+		2.视频和音频
+			video和audio
+			以及提供的play和pause方法；
+		3.Canvas画图
+				var ctx=canvas.getContext('2d');
+					ctx.beginPath();
+					ctx.moveTo(x,y);
+					ctx.lineTo(x,y);
+					ctx.closePath();
+					chart.js
+					利用定时器可以做一些动画；
+					缺点：因为每个图形图像都不是HTML元素，不能直接绑定事件监听；
+						所有的时间都是绑定canvas元素，再进一步绑定鼠标所在位置判断，
+		4.svg
+			适量图，放大不失真，每一个图形都是一个svg元素可以为任意图形进行时间监听；
+			<polyline></polyline>  绘制折现；
+			<polygon></golygon>     绘制多边形；
+			Two.js
+		5.地理定位
+			var g=window.navigator.geolocation;
+			g.getCurrentPosition(succCallback,errCallback);
+		6.拖放事件
+				源对象  被拖动的对象
+					ondragstart  （开始拖动）
+					ondrag    （拖动中）
+					ondragend (拖动结束)
+				目标对象  被拖动的对象可以移动到目标对象，实施移除和释放；
+					ondragenter
+					ondragover
+					ondragleave
+		7.web worker
+				操作系统
+				进程：分配内存的基本单位
+				线程：是进程内部执行的代码
+				主渲染线程与Worker线程间传递数据
+				var w1=new Work('xxx.js');
+						w1.postMessage('str');
+				onmessage=function(event){event.data}
+				
+		8.web storage
+				客户端存储，web存储，数据不能超过8MB，操作简单。
+				sessionStorage
+					会话级存储；窗口关闭，会话消失
+				localStorage
+					本地、跨会话级存储；窗口关闭并不影响；
+		9.web cookie
+				所有浏览器都支持，存储不能超过4kb,操作复杂。
+		10.web Socket
+				web Socket协议，客户端一点连接服务器就不断开（永久连接），
+				HTTP基于“请求的-响应模式”，客户端你发送一个请求，服务器返回一个请求 。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
