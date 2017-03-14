@@ -119,6 +119,7 @@ CSS高级
 							transition-delay:
 			2.5 动画
 							声明动画：@keyframes name{}
+							调用动画：
 							animation-name
 							animation-duration
 							animation-timing-function
@@ -127,6 +128,7 @@ CSS高级
 							animation-direction
 							animation-fill-mode:
 							animation-play-state:
+						
 			定时器：
 							setInterval(function(){},时间间隔)
 								clearInterval(t)
