@@ -9,4 +9,67 @@
 		3.boolean 布尔类型
 		4.undefined  不存在改数据；声明的不变量未赋值，访问的对象属性不存在；
 	②引用类型
-3.typeof 返回的值
+3.typeof 返回
+4.隐私转换
+	不同类型数据在计算过程中会进行自动的转换;
+	任何数据类型与字符串相加,结构都为string;
+5.显示转换
+	1.toString()转换成字符串;
+	2.parseInt(value);转化成整数;
+	3.parseFloat(value);转化成小数
+6.for和while之间的不同;
+	确定循环次数优先是for,不确定循环次数使用whihle;
+7.数组:
+8.元素属性:
+		①读取属性:
+			elem.getAttribute('属性名');
+		②修改属性:
+			elem.setAttribute(name,value);
+		③添加属性
+			var attr=document.createAttribute('href');
+			attr.nodeValue='';
+9.样式
+		①内联:
+				获取:elem.style.属性名
+				设置:elem.style.属性名='值';
+				在IE中:
+					元素的对象.currentStyle.属性
+		②内部或外部:
+				(优先使用内联的方式进行设置属性)
+				
+				修改:
+						(获取样式表对象)
+						var sheet=document.styleSheets[0];
+						(获取所有样式规则的集合)
+						var rules=sheet.rules;
+						(样式规则)
+						var rule=rules[0];
+						(获取或设置rules的属性)
+						rule.style.属性名;
+						document.styleSheets[0].rules[0].style.属性名;
+	10.文本内容
+			属性:innerHtml元素的html的内容;
+					textContent:元素的文本内容;
+					
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
