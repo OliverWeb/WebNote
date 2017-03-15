@@ -51,6 +51,7 @@
 			属性:innerHtml元素的html的内容;
 					textContent:元素的文本内容;
 					
+					
 
 
 
